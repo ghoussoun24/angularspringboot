@@ -1,0 +1,26 @@
+<div class="login-container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow login-card">
+    <h3 class="text-center mb-4">Se connecter</h3>
+
+    <form (ngSubmit)="login()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+      <button type="submit" class="btn btn-primary w-100 mb-3">Se connecter</button>
+    </form>
+
+    <div class="text-center">
+      <button class="btn btn-link p-0" (click)="forgotPassword()">Mot de passe oublié ?</button>
+      <button class="btn btn-link p-0" (click)="inscription()">Inscription ?</button>
+    </div>
+  </div>
+</div>
