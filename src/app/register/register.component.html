@@ -1,11 +1,41 @@
 <div class="container mt-5">
   <h2>Register</h2>
-  <input type="text" [(ngModel)]="firstname" placeholder="Prénom" class="form-control" />
-  <input type="text" [(ngModel)]="lastname" placeholder="Nom" class="form-control mt-2" />
-  <input type="email" [(ngModel)]="email" placeholder="Email" class="form-control mt-2" />
-  <input type="role" [(ngModel)]="role" placeholder="role" class="form-control mt-2" />
-  <input type="password" [(ngModel)]="password" placeholder="Mot de passe" class="form-control mt-2" />
-  <button class="btn btn-success mt-2" (click)="register()">S'inscrire</button>
+  <form (ngSubmit)="register()">
+    <div class="mb-3">
+      <label for="firstname" class="form-label">Prénom</label>
+      <input type="text" id="firstname" class="form-control" [(ngModel)]="firstname" name="firstname" #firstnameModel="ngModel" required>
+      <div *ngIf="firstnameModel.invalid && (firstnameModel.dirty || firstnameModel.touched)">
+        <small *ngIf="firstnameModel.errors?.['required']" class="text-danger">First name is required</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="lastname" class="form-label">Nom</label>
+      <input type="text" id="lastname" class="form-control" [(ngModel)]="lastname" name="lastname" #lastnameModel="ngModel" required>
+      <div *ngIf="lastnameModel.invalid && (lastnameModel.dirty || lastnameModel.touched)">
+        <small *ngIf="lastnameModel.errors?.['required']" class="text-danger">Last name is required</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" #emailModel="ngModel" required email>
+      <div *ngIf="emailModel.invalid && (emailModel.dirty || emailModel.touched)">
+        <small *ngIf="emailModel.errors?.['required']" class="text-danger">Email is required</small>
+        <small *ngIf="emailModel.errors?.['email']" class="text-danger">Invalid email format</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" #passwordModel="ngModel" required>
+      <div *ngIf="passwordModel.invalid && (passwordModel.dirty || passwordModel.touched)">
+        <small *ngIf="passwordModel.errors?.['required']" class="text-danger">Password is required</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100 mb-3">S'inscrire</button>
+  </form>
   <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
 </div>
 

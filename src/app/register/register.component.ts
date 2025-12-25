@@ -16,16 +16,48 @@ export class RegisterComponent {
   lastname = '';
   email = '';
   password = '';
-  role='';
+  role='USER';
   error = '';
 
   constructor(private auth: AuthService, private router: Router) {}
 
   register() {
     this.error = '';
-    this.auth.register({ firstname: this.firstname, lastname: this.lastname, email: this.email, password: this.password, role: 'USER' }).subscribe({
+
+    // Validation: check if firstname is empty
+    if (!this.firstname.trim()) {
+      this.error = 'First name is required';
+      return;
+    }
+
+    // Validation: check if lastname is empty
+    if (!this.lastname.trim()) {
+      this.error = 'Last name is required';
+      return;
+    }
+
+    // Validation: check if email is empty
+    if (!this.email.trim()) {
+      this.error = 'Email is required';
+      return;
+    }
+
+    // Validation: check email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.email)) {
+      this.error = 'Invalid email format';
+      return;
+    }
+
+    // Validation: check if password is empty
+    if (!this.password.trim()) {
+      this.error = 'Password is required';
+      return;
+    }
+
+    this.auth.register({ firstname: this.firstname, lastname: this.lastname, email: this.email, password: this.password, role: this.role }).subscribe({
       next: () => this.router.navigate(['/login']),
-      error: (err) => this.error = err.error
+      error: (err) => this.error = err.error?.message || 'Registration failed'
     });
   }
 
