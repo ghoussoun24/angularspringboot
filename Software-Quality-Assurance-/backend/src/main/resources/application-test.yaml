@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+  email:
+    enabled: false
+
+
+  # Configuration pour gérer les 404 dans les tests
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+  # Configuration Jackson pour UTF-8
+  jackson:
+    default-property-inclusion: non_null
+    charset: UTF-8
+
+application:
+  security:
+    jwt:
+      secret-key: testsecretkeytestsecretkeytestsecretkeytestsecretkey
+      expiration: 86400000
+      refresh-token:
+        expiration: 604800000
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      force-response: true
+
+logging:
+  level:
+    com.example.security: DEBUG
+    org.springframework.web: INFO
+    org.springframework.test: INFO

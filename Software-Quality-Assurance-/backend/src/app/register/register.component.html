@@ -1,0 +1,11 @@
+<div class="container mt-5">
+  <h2>Register</h2>
+  <input type="text" [(ngModel)]="firstname" placeholder="Prénom" class="form-control" />
+  <input type="text" [(ngModel)]="lastname" placeholder="Nom" class="form-control mt-2" />
+  <input type="email" [(ngModel)]="email" placeholder="Email" class="form-control mt-2" />
+  <input type="role" [(ngModel)]="role" placeholder="role" class="form-control mt-2" />
+  <input type="password" [(ngModel)]="password" placeholder="Mot de passe" class="form-control mt-2" />
+  <button class="btn btn-success mt-2" (click)="register()">S'inscrire</button>
+  <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+</div>
+
